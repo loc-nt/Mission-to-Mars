@@ -4,7 +4,7 @@
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-   <title>Document</title>
+   <title>Module 10 Challenge</title>
    
    <!-- this is a link to bootstrap -->
    <link 
@@ -63,8 +63,54 @@
           </div>
         </div>
       </div>
+    </div>
+    
+    <!-- Hemispheres -->
+      <!-- Title -->
+    <div class="container">
+      <div class="jumbotron text-center">
+        <h2>Mars Hemispheres</h2>
+      </div>
+    </div>
+    
+    <div class='row' id="hemispheres">      
+      <!-- 1st hemisphere-->
+      <div class="col-sm-3">
+        <h4>{{mars.hemispheres.0.title}}</h4>    
+        <a href="/hemi1">
+          <img src="{{mars.hemispheres.0.img_url}}" class="img-thumbnail" alt="Responsive image" />        
+        </a>
+      </div>
+
+      <!-- 2nd hemisphere-->
+      <div class="col-sm-3">
+        <h4>{{mars.hemispheres.1.title}}</h4>
+        <a href="/hemi2">
+          <img src="{{mars.hemispheres.1.img_url}}" class="img-thumbnail" alt="Responsive image"/> 
+        </a>
+      </div>
+
+      <!-- 3rd hemisphere-->
+      <div class="col-sm-3">
+        <h4>{{mars.hemispheres.2.title}}</h4>
+        <a href="/hemi3">
+          <img src="{{mars.hemispheres.2.img_url}}" class="img-thumbnail" alt="Responsive image"/>
+        </a>
+      </div>
+
+      <!-- 4th hemisphere-->
+      <div class="col-sm-3">
+        <h4>{{mars.hemispheres.3.title}}</h4>
+        <a href="/hemi4">
+          <img src="{{mars.hemispheres.3.img_url}}" class="img-thumbnail" alt="Responsive image"/>
+        </a>
+      </div>
+
 
     </div>
+
+
+    
 
 
  </body>

@@ -19,13 +19,70 @@ def scrape_all():
         "news_paragraph": news_paragraph,
         "featured_image": featured_image(browser),
         "facts": mars_facts(),
-        "last_modified": dt.datetime.now()
+        "last_modified": dt.datetime.now(),
+        "hemispheres": hemis(browser)
     }
 
     # Quit the browser to stop using our resources:
     browser.quit()
 
     return data
+
+def hemis(browser):
+    # Visit the mars nasa news site
+    url_hemi = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
+    browser.visit(url_hemi)
+    # Optional delay for loading the page: wait a second before searching for components since the website may have heavy-loading images
+    browser.is_element_present_by_css("div.collapsible.results", wait_time=1)
+    # set up the HTML parser
+    html = browser.html
+    img_soup = BeautifulSoup(html, 'html.parser')
+
+    # Add try/except for error handling
+    try:
+        # pinpoints the <div /> tag with a class of “collapsible results”
+        elem = img_soup.select_one('div.collapsible.results')
+        # colelct all hemis related_links:
+        all_hemis = elem.find_all('div', class_='description')
+        all_img_links = [hemi.select_one('a.itemLink.product-item').get("href") \
+                    for hemi in all_hemis]
+        # Hemisphere list:
+        hemi_list = []
+
+        # Full loop to get all four img links:
+        for i in all_img_links:
+            base_url = 'https://astrogeology.usgs.gov'
+            link = f'{base_url}{i}'
+            
+            # visit the page:
+            browser.visit(link)
+            browser.is_element_not_present_by_css("div.wide-image-wrapper", wait_time=1)
+                
+            # Parse the resulting html with soup
+            hemi_html = browser.html
+            hemi_html_soup = BeautifulSoup(hemi_html, 'html.parser')
+            
+            # Find the relative image url
+            # use 2 tags: <div /> class=wide-image-wrapper --> <img /> class=wide-image
+            img_url_rel = hemi_html_soup.select_one('div.wide-image-wrapper img.wide-image').get("src")
+            # Use the base URL to create an absolute URL
+            img_url = f'{base_url}{img_url_rel}'
+            
+            # Find the image title
+            # use all 2 tags: <div /> class=content --> <h2 /> class=title
+            img_title = hemi_html_soup.select_one('div.content h2.title').text
+            
+            # Return the result into a dict, then append to the list:
+            hemi_dict = {
+                "img_url": img_url,
+                "title": img_title
+            }
+            hemi_list.append(hemi_dict)
+    
+    except AttributeError:
+        return [None]
+    
+    return hemi_list
 
 def mars_news(browser):
     # Visit the mars nasa news site

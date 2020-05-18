@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+   <title>Document</title>
+   
+   <!-- this is a link to bootstrap -->
+   <link 
+      rel="stylesheet" 
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+      
+    />
+
+ </head>
+ <body>
+    
+    <!-- Class Container is required to use bootstrap --> 
+    <div class="container">
+      <!-- Use Bootstrap Jumbotron component for header -->
+      <div class="jumbotron text-center">
+        <h1>{{mars.hemispheres.2.title}}</h1>
+        <img src="{{mars.hemispheres.2.img_url}}" class="img-responsive" alt="Responsive image"/>
+        <!-- Add a button go back to homepage -->
+        <p><a class="btn btn-primary btn-lg" href="/" role="button">Back to Home page
+        </a></p>
+      </div>
+    </div>
+
+ </body>
+</html>

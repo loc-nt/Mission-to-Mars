@@ -21,5 +21,25 @@ def scrape():
    mars.update({}, mars_data, upsert=True) # upsert=True, which tells Mongo to create a new document if one doesn’t already exist.
    return "Scraping Successful!"
 
+@app.route("/hemi1")
+def hemi1():
+   mars = mongo.db.mars.find_one()
+   return render_template("hemi1.html", mars=mars)
+
+@app.route("/hemi2")
+def hemi2():
+   mars = mongo.db.mars.find_one()
+   return render_template("hemi2.html", mars=mars)
+
+@app.route("/hemi3")
+def hemi3():
+   mars = mongo.db.mars.find_one()
+   return render_template("hemi3.html", mars=mars)
+
+@app.route("/hemi4")
+def hemi4():
+   mars = mongo.db.mars.find_one()
+   return render_template("hemi4.html", mars=mars)
+
 if __name__ == "__main__":
    app.run()
